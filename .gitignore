@@ -1,0 +1,12 @@
+﻿# ROMs / dumps / saves — NEVER commit (PRINCIPLES #26)
+*.sms
+*.gg
+*.bin
+*.sav
+*.state
+# Build + generated artifacts
+build/
+*.exe
+*.log
+generated/*.c
+generated/*.h
