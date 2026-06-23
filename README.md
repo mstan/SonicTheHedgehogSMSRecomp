@@ -26,6 +26,14 @@ over the live bus. You supply your own legally-dumped copy of the ROM; it is
 > coverage across full gameplay is unverified, and more code paths will surface
 > during real play (the built-in interpreter fallback handles them when they do).
 
+## Screenshots
+
+Recompiled native build (no emulator), captured running the .sms ROM:
+
+| Green Hill Zone | Zone title card |
+|---|---|
+| ![Green Hill Zone gameplay](screenshots/green-hill-zone.png) | ![Green Hill title card](screenshots/green-hill-title-card.png) |
+
 ## Quick start (pre-built release)
 
 1. Download `SonicTheHedgehogSMSRecomp-windows-x64.zip` from
