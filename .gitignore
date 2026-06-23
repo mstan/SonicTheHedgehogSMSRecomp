@@ -10,3 +10,8 @@ build/
 *.log
 generated/*.c
 generated/*.h
+# vendored runtime DLLs + release artifacts (never committed)
+*.dll
+*-windows-x64.zip
+release/
+release-stage/

@@ -1,0 +1,5 @@
+# smsggrecomp.pin — the engine commit this game was built and verified against.
+# Check out https://github.com/mstan/smsggrecomp as a sibling dir ../smsggrecomp
+# at this commit, build its recompiler, then run build.ps1 here.
+repo   = https://github.com/mstan/smsggrecomp
+commit = cebd91fe1a364fc5e6374a980668acc7decb78fa
