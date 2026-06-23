@@ -38,8 +38,11 @@ $gccArgs = @(
 )
 if ($Jit) {
     $sljit = Join-Path $runner "external\sljit\sljit_src"
-    $gccArgs += @("-DSMS_HAVE_JIT","-DSLJIT_CONFIG_AUTO=1","-I","$runner\jit","-I","$sljit",
-                  "$runner\jit\shard_jit.c","$sljit\sljitLir.c","-lpthread")
+    $rsrc  = Join-Path $engine "recompiler\src"
+    $gccArgs += @("-DSMS_HAVE_JIT","-DSLJIT_CONFIG_AUTO=1",
+                  "-I","$runner\jit","-I","$sljit","-I","$runner\external\superzazu","-I","$rsrc",
+                  "$runner\jit\shard_jit.c","$runner\jit\z80_sljit.c","$runner\jit\z80_sljit_helpers.c",
+                  "$sljit\sljitLir.c","$rsrc\z80_decoder.c","-lpthread")
     Write-Host "    (Tier-2 sljit shard JIT: ENABLED)"
 }
 $gccArgs += @("-L","$Sdl\lib","-lSDL2","-o",$out)
