@@ -18,10 +18,13 @@ over the live bus. You supply your own legally-dumped copy of the ROM; it is
 
 ## Status
 
-> **v0.0.1 — very early, mostly untested. Expect bugs.**
-> Boots and plays **Green Hill Zone**, rendering byte-exact to the superzazu
-> interpreter oracle on the verified path (100% statically recompiled, no hybrid
-> fallback). Beyond GHZ is largely unexercised. This is a tech-demo-grade drop.
+> **v0.0.2 — early pre-release. Expect bugs.**
+> Across the title and attract-demo sequence we exercised (~60s), the build runs
+> entirely as recompiled native code (no interpreter-fallback dispatch miss was
+> hit on that path) and renders byte-exact to the superzazu interpreter oracle on
+> palette (CRAM) and system RAM. The game has **not** been played end to end:
+> coverage across full gameplay is unverified, and more code paths will surface
+> during real play (the built-in interpreter fallback handles them when they do).
 
 ## Quick start (pre-built release)
 
