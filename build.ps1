@@ -9,7 +9,8 @@
 # Usage:  powershell -File build.ps1 [-Rom sonicthehedgehog.sms] [-Sdl C:\msys64\mingw64]
 param(
     [string]$Rom = "sonicthehedgehog.sms",
-    [string]$Sdl = "C:\msys64\mingw64"
+    [string]$Sdl = "C:\msys64\mingw64",
+    [switch]$Jit          # opt-in Tier-2 sljit shard JIT (off by default; see ../smsggrecomp/SLJIT.md)
 )
 $ErrorActionPreference = "Stop"
 
@@ -28,12 +29,21 @@ Write-Host "[1/2] Regenerating native C from $Rom ..."
 if ($LASTEXITCODE -ne 0) { throw "recompiler failed ($LASTEXITCODE)" }
 
 Write-Host "[2/2] Compiling windowed build -> $out ..."
-& gcc -O1 -DSMSGG_HAVE_GAME_LAYOUT -DSMS_HAVE_SDL `
-    -I "$runner" -I "$runner\include" -I "$runner\video" -I "$gen" -I "$Sdl\include\SDL2" `
-    "$runner\main.c" "$runner\glue.c" "$runner\video\sms_vdp.c" "$runner\audio\sn76489.c" `
-    "$runner\external\superzazu\z80.c" "$runner\host_sdl.c" `
-    "$gen\${prefix}_full.c" "$gen\${prefix}_dispatch.c" "$gen\${prefix}_layout.c" `
-    -L "$Sdl\lib" -lSDL2 -o $out
+$gccArgs = @(
+    "-O1","-DSMSGG_HAVE_GAME_LAYOUT","-DSMS_HAVE_SDL",
+    "-I","$runner","-I","$runner\include","-I","$runner\video","-I","$gen","-I","$Sdl\include\SDL2",
+    "$runner\main.c","$runner\glue.c","$runner\video\sms_vdp.c","$runner\audio\sn76489.c",
+    "$runner\external\superzazu\z80.c","$runner\host_sdl.c",
+    "$gen\${prefix}_full.c","$gen\${prefix}_dispatch.c","$gen\${prefix}_layout.c"
+)
+if ($Jit) {
+    $sljit = Join-Path $runner "external\sljit\sljit_src"
+    $gccArgs += @("-DSMS_HAVE_JIT","-DSLJIT_CONFIG_AUTO=1","-I","$runner\jit","-I","$sljit",
+                  "$runner\jit\shard_jit.c","$sljit\sljitLir.c","-lpthread")
+    Write-Host "    (Tier-2 sljit shard JIT: ENABLED)"
+}
+$gccArgs += @("-L","$Sdl\lib","-lSDL2","-o",$out)
+& gcc @gccArgs
 if ($LASTEXITCODE -ne 0) { throw "gcc failed ($LASTEXITCODE)" }
 
 Copy-Item (Join-Path $Sdl "bin\SDL2.dll") . -Force -ErrorAction SilentlyContinue
