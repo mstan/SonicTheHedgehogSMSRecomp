@@ -9,8 +9,7 @@
 # Usage:  powershell -File build.ps1 [-Rom sonicthehedgehog.sms] [-Sdl C:\msys64\mingw64]
 param(
     [string]$Rom = "sonicthehedgehog.sms",
-    [string]$Sdl = "C:\msys64\mingw64",
-    [switch]$Jit          # opt-in Tier-2 sljit shard JIT (off by default; see ../smsggrecomp/SLJIT.md)
+    [string]$Sdl = "C:\msys64\mingw64"
 )
 $ErrorActionPreference = "Stop"
 
@@ -36,15 +35,6 @@ $gccArgs = @(
     "$runner\external\superzazu\z80.c","$runner\host_sdl.c",
     "$gen\${prefix}_full.c","$gen\${prefix}_dispatch.c","$gen\${prefix}_layout.c"
 )
-if ($Jit) {
-    $sljit = Join-Path $runner "external\sljit\sljit_src"
-    $rsrc  = Join-Path $engine "recompiler\src"
-    $gccArgs += @("-DSMS_HAVE_JIT","-DSLJIT_CONFIG_AUTO=1",
-                  "-I","$runner\jit","-I","$sljit","-I","$runner\external\superzazu","-I","$rsrc",
-                  "$runner\jit\shard_jit.c","$runner\jit\z80_sljit.c","$runner\jit\z80_sljit_helpers.c",
-                  "$sljit\sljitLir.c","$rsrc\z80_decoder.c","-lpthread")
-    Write-Host "    (Tier-2 sljit shard JIT: ENABLED)"
-}
 $gccArgs += @("-L","$Sdl\lib","-lSDL2","-o",$out)
 & gcc @gccArgs
 if ($LASTEXITCODE -ne 0) { throw "gcc failed ($LASTEXITCODE)" }
