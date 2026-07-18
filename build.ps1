@@ -1,8 +1,8 @@
 # build.ps1 — regenerate + build SonicTheHedgehogSMSRecomp (windowed) from your ROM.
 #
 # Requires:
-#   - the smsggrecomp engine checked out as a sibling: ..\smsggrecomp
-#     (built recompiler at ..\smsggrecomp\recompiler\build\SmsRecomp.exe)
+#   - the smsggrecomp submodule initialized in .\smsggrecomp
+#     (built recompiler at .\smsggrecomp\recompiler\build\SmsRecomp.exe)
 #   - MinGW-w64 gcc + SDL2 dev libs (MSYS2 'mingw64' by default)
 #   - your own legally-dumped ROM next to this script
 #
@@ -15,13 +15,13 @@ $ErrorActionPreference = "Stop"
 
 $prefix = "sonic1sms"
 $out    = "SonicTheHedgehogSMSRecomp.exe"
-$engine = (Resolve-Path "..\smsggrecomp").Path
+$engine = (Resolve-Path ".\smsggrecomp").Path
 $recomp = Join-Path $engine "recompiler\build\SmsRecomp.exe"
 $runner = Join-Path $engine "runner"
 $gen    = Join-Path (Get-Location) "generated"
 
 if (-not (Test-Path $Rom))    { throw "ROM '$Rom' not found. Supply your own legally-dumped copy." }
-if (-not (Test-Path $recomp)) { throw "Recompiler not built: $recomp (build ..\smsggrecomp\recompiler first)." }
+if (-not (Test-Path $recomp)) { throw "Recompiler not built: $recomp (initialize and build the smsggrecomp submodule first)." }
 
 Write-Host "[1/2] Regenerating native C from $Rom ..."
 & $recomp $Rom --game game.toml

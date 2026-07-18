@@ -1,0 +1,3 @@
+[submodule "smsggrecomp"]
+	path = smsggrecomp
+	url = https://github.com/mstan/smsggrecomp.git

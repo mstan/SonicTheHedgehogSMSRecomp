@@ -67,13 +67,13 @@ The ROM is **never** redistributed — supply your own legally-dumped copy.
 
 ## Building from source
 
-Requires the [smsggrecomp](https://github.com/mstan/smsggrecomp) engine checked
-out as a sibling directory (`../smsggrecomp`) at the commit in `smsggrecomp.pin`,
+Requires the [smsggrecomp](https://github.com/mstan/smsggrecomp) submodule,
 its recompiler built (`recompiler/build/SmsRecomp.exe`), plus MinGW `gcc` and
 SDL2 (MSYS2 `mingw64`).
 
 ```powershell
-# from this repo, with your ROM present and ../smsggrecomp built:
+git submodule update --init --recursive
+# with your ROM present and ./smsggrecomp built:
 powershell -File build.ps1            # regenerates the C from your ROM, then builds the windowed exe
 ```
 
@@ -87,7 +87,7 @@ shared runner into `SonicTheHedgehogSMSRecomp.exe`.
 |------|---------|
 | `game.toml` | Per-game config: ROM identity, mapper, RAM layout, discovery seeds, jump tables. |
 | `build.ps1` | Regenerate from your ROM + build the windowed exe. |
-| `smsggrecomp.pin` | The engine commit this game was verified against. |
+| `smsggrecomp/` | Pinned engine submodule used to build the game. |
 | `generated/` | Recompiler output (gitignored; regenerated from your ROM). |
 
 ## License
