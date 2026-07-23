@@ -75,6 +75,7 @@ SDL2 (MSYS2 `mingw64`).
 git submodule update --init --recursive
 # with your ROM present and ./smsggrecomp built:
 powershell -File build.ps1            # regenerates the C from your ROM, then builds the windowed exe
+powershell -File build.ps1 -SkipRegenerate  # rebuilds from existing generated C
 ```
 
 The recompiler reads `game.toml`, writes `generated/<prefix>_{full,dispatch,layout}.c`
