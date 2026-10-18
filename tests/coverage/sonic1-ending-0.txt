@@ -1,0 +1,12 @@
+rom B519E833
+300 pad B
+310 pad -
+1000 write D23E 13
+1000 write D2D3 13
+1000 write D27F 00
+1000 or D206 10
+1000 write D289 01
+1250 capture f1250
+2500 capture f2500
+4000 capture f4000
+6000 capture f6000

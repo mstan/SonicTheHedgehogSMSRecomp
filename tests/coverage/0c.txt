@@ -1,0 +1,13 @@
+rom b519e833
+300 pad B
+310 pad -
+1000 write D23E 0C
+1000 write D2D3 0C
+1000 or D206 10
+1000 write D289 01
+1250 capture loaded
+1280 pad RB
+1310 pad R
+1370 capture moved
+1400 pad -
+1500 capture final
