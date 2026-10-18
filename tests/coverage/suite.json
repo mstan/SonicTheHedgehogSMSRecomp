@@ -1,0 +1,151 @@
+{
+  "rom_crc32": "B519E833",
+  "rom_size": 262144,
+  "cases": [
+    {
+      "name": "00",
+      "route": "00.txt",
+      "frames": 1500
+    },
+    {
+      "name": "01",
+      "route": "01.txt",
+      "frames": 1500
+    },
+    {
+      "name": "02",
+      "route": "02.txt",
+      "frames": 1500
+    },
+    {
+      "name": "03",
+      "route": "03.txt",
+      "frames": 1500
+    },
+    {
+      "name": "04",
+      "route": "04.txt",
+      "frames": 1500
+    },
+    {
+      "name": "05",
+      "route": "05.txt",
+      "frames": 1500
+    },
+    {
+      "name": "06",
+      "route": "06.txt",
+      "frames": 1500
+    },
+    {
+      "name": "07",
+      "route": "07.txt",
+      "frames": 1500
+    },
+    {
+      "name": "08",
+      "route": "08.txt",
+      "frames": 1500
+    },
+    {
+      "name": "09",
+      "route": "09.txt",
+      "frames": 1500
+    },
+    {
+      "name": "0a",
+      "route": "0a.txt",
+      "frames": 1500
+    },
+    {
+      "name": "0b",
+      "route": "0b.txt",
+      "frames": 1500
+    },
+    {
+      "name": "0c",
+      "route": "0c.txt",
+      "frames": 1500
+    },
+    {
+      "name": "0d",
+      "route": "0d.txt",
+      "frames": 1500
+    },
+    {
+      "name": "0e",
+      "route": "0e.txt",
+      "frames": 1500
+    },
+    {
+      "name": "0f",
+      "route": "0f.txt",
+      "frames": 1500
+    },
+    {
+      "name": "10",
+      "route": "10.txt",
+      "frames": 1500
+    },
+    {
+      "name": "11",
+      "route": "11.txt",
+      "frames": 1500
+    },
+    {
+      "name": "12",
+      "route": "12.txt",
+      "frames": 1500
+    },
+    {
+      "name": "1c",
+      "route": "1c.txt",
+      "frames": 1500
+    },
+    {
+      "name": "1d",
+      "route": "1d.txt",
+      "frames": 1500
+    },
+    {
+      "name": "1e",
+      "route": "1e.txt",
+      "frames": 1500
+    },
+    {
+      "name": "1f",
+      "route": "1f.txt",
+      "frames": 1500
+    },
+    {
+      "name": "20",
+      "route": "20.txt",
+      "frames": 1500
+    },
+    {
+      "name": "21",
+      "route": "21.txt",
+      "frames": 1500
+    },
+    {
+      "name": "22",
+      "route": "22.txt",
+      "frames": 1500
+    },
+    {
+      "name": "23",
+      "route": "23.txt",
+      "frames": 1500
+    },
+    {
+      "name": "sonic1-ending-0",
+      "route": "sonic1-ending-0.txt",
+      "frames": 6000
+    },
+    {
+      "name": "sonic1-ending-6",
+      "route": "sonic1-ending-6.txt",
+      "frames": 6000
+    }
+  ]
+}

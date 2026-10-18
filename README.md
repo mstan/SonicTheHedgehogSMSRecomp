@@ -18,13 +18,7 @@ over the live bus. You supply your own legally-dumped copy of the ROM; it is
 
 ## Status
 
-> **v0.0.2 — early pre-release. Expect bugs.**
-> Across the title and attract-demo sequence we exercised (~60s), the build runs
-> entirely as recompiled native code (no interpreter-fallback dispatch miss was
-> hit on that path) and renders byte-exact to the superzazu interpreter oracle on
-> palette (CRAM) and system RAM. The game has **not** been played end to end:
-> coverage across full gameplay is unverified, and more code paths will surface
-> during real play (the built-in interpreter fallback handles them when they do).
+**v0.0.3 — assisted coverage pre-release.** The assisted survey covers 27 original level/bonus selectors and two ending variants through the staff roll. The 37-entry ROM-verified dispatch profile runs those routes with zero fallback. All 89 native/interpreter rendered checkpoints agree. These are assisted scene tests; full unassisted gameplay remains unverified. See [coverage details](smsggrecomp/COVERAGE.md) and [reproducible routes](tests/coverage/suite.json).
 
 ## Screenshots
 
@@ -59,7 +53,7 @@ Recompiled native build (no emulator), captured running the .sms ROM:
 | Field | Value |
 |-------|-------|
 | Title | Sonic the Hedgehog (SMS) |
-| Region | SMS Export |
+| Region | USA / Europe / Brazil (identical retail image) |
 | CRC32 | `0xB519E833` |
 | Size | 256 KB |
 
@@ -67,20 +61,26 @@ The ROM is **never** redistributed — supply your own legally-dumped copy.
 
 ## Building from source
 
-Requires the [smsggrecomp](https://github.com/mstan/smsggrecomp) submodule,
-its recompiler built (`recompiler/build/SmsRecomp.exe`), plus MinGW `gcc` and
-SDL2 (MSYS2 `mingw64`).
+Initialize recursive submodules and install native Windows CMake, Ninja, GCC
+and SDL2 (the helper defaults to MSYS2 `C:\msys64\mingw64`). The shared build
+graph builds the recompiler and regenerates the native C from your own ROM:
 
 ```powershell
 git submodule update --init --recursive
-# with your ROM present and ./smsggrecomp built:
-powershell -File build.ps1            # regenerates the C from your ROM, then builds the windowed exe
-powershell -File build.ps1 -SkipRegenerate  # rebuilds from existing generated C
+powershell -File build.ps1 -Rom 'path\to\sonicthehedgehog.sms'
+.\build\SonicTheHedgehogSMSRecomp.exe 'path\to\sonicthehedgehog.sms' --window 3
 ```
 
-The recompiler reads `game.toml`, writes `generated/<prefix>_{full,dispatch,layout}.c`
-(gitignored — a derivative of the ROM), and `build.ps1` compiles those plus the
-shared runner into `SonicTheHedgehogSMSRecomp.exe`.
+`-Build` accepts an absolute directory; invoking the script from another
+directory still builds this project. `-Framework` selects an alternate engine
+checkout. `-SkipRegenerate` requires compatible generated sources already on
+disk. Generated C and ROMs are ignored and are not distributed.
+
+For a deterministic coverage run:
+
+```text
+python smsggrecomp/tools/run_coverage_suite.py --runtime build/SonicTheHedgehogSMSRecomp.exe --rom path/to/sonicthehedgehog.sms --suite tests/coverage/suite.json --out coverage-new
+```
 
 ## Repo layout
 
