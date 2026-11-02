@@ -18,7 +18,7 @@ over the live bus. You supply your own legally-dumped copy of the ROM; it is
 
 ## Status
 
-**v0.0.3 — assisted coverage pre-release.** The assisted survey covers 27 original level/bonus selectors and two ending variants through the staff roll. The 37-entry ROM-verified dispatch profile runs those routes with zero fallback. All 89 native/interpreter rendered checkpoints agree. These are assisted scene tests; full unassisted gameplay remains unverified. See [coverage details](smsggrecomp/COVERAGE.md) and [reproducible routes](tests/coverage/suite.json).
+**v0.0.4 — assisted coverage pre-release.** The assisted survey covers 27 original level/bonus selectors and two ending variants through the staff roll. The ROM-verified dispatch profile runs those routes with zero fallback. All 89 native/interpreter rendered checkpoints agree. These are assisted scene tests; full unassisted gameplay remains unverified. See [coverage details](smsggrecomp/COVERAGE.md) and [reproducible routes](tests/coverage/suite.json).
 
 ## Screenshots
 
@@ -37,6 +37,11 @@ Recompiled native build (no emulator), captured running the .sms ROM:
    ```
    SonicTheHedgehogSMSRecomp.exe path\to\sonicthehedgehog.sms --window 3
    ```
+
+For faithful 16x internal resolution, add `--internal-scale 16`, or drag your ROM onto
+`Play 16x.cmd` in the release ZIP. Tile artwork stays sharp with no smoothing or
+invented detail. `Play.cmd` uses the normal native-resolution display. Both run
+with normal audio. An unsupported GPU falls back to native output.
 
 ## Controls
 
