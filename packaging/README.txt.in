@@ -1,0 +1,14 @@
+Sonic the Hedgehog (Master System) - v@VERSION@
+
+Supply your own supported ROM (CRC32 B519E833). No ROM is included.
+Drag the ROM onto Play.cmd for normal native resolution or Play 16x.cmd for faithful 16x GPU output. Normal audio is enabled.
+You can also run: @EXE@ path	o\sonicthehedgehog.sms --window 3 --internal-scale 16
+
+Controls: arrows move, Z/X buttons, Enter Start, Esc quit.
+Original tile artwork is preserved with no smoothing or invented detail. Unsupported GPU drivers fall back to native output.
+
+License: PolyForm Noncommercial 1.0.0 with additional permissions for donations
+and advertising. Payment must not buy access to this software or game content.
+Full terms and all third-party notices are in the licenses folder.
+
+Source and release notes: https://github.com/mstan/SonicTheHedgehogSMSRecomp

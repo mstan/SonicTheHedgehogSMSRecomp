@@ -31,7 +31,8 @@ Recompiled native build (no emulator), captured running the .sms ROM:
 ## Quick start (pre-built release)
 
 1. Download `SonicTheHedgehogSMSRecomp-windows-x64.zip` from
-   [Releases](../../releases) and unzip it (keep `SDL2.dll` next to the `.exe`).
+   [Releases](../../releases) and unzip it (keep `SDL2.dll` next to the `.exe`). License notices are in
+   `licenses/`.
 2. Supply your own legally-obtained *Sonic the Hedgehog (SMS)* ROM (`.sms`).
 3. Run it with your ROM:
    ```
@@ -87,19 +88,50 @@ For a deterministic coverage run:
 python smsggrecomp/tools/run_coverage_suite.py --runtime build/SonicTheHedgehogSMSRecomp.exe --rom path/to/sonicthehedgehog.sms --suite tests/coverage/suite.json --out coverage-new
 ```
 
+### Packaging a release
+
+```powershell
+powershell -File smsggrecomp/tools/package_game_release.ps1 -ProjectRoot .
+```
+
+This stages the built exe, `SDL2.dll`, `Play.cmd`/`Play 16x.cmd`,
+`README.txt` (from [`packaging/README.txt.in`](packaging/README.txt.in)) and
+every license notice under `licenses/`, then writes
+`release/SonicTheHedgehogSMSRecomp-windows-x64.zip`. It fails if any notice is missing.
+
 ## Repo layout
 
 | Path | Purpose |
 |------|---------|
 | `game.toml` | Per-game config: ROM identity, mapper, RAM layout, discovery seeds, jump tables. |
 | `build.ps1` | Regenerate from your ROM + build the windowed exe. |
+| `packaging/` | Release README template for the shared packager. |
 | `smsggrecomp/` | Pinned engine submodule used to build the game. |
 | `generated/` | Recompiler output (gitignored; regenerated from your ROM). |
 
 ## License
 
-Not yet declared. Code in this repo is original. The *Sonic the Hedgehog* ROM
-and any data derived from it are **not** in this repo and are not licensed for
+PolyForm Noncommercial 1.0.0, with [additional permissions](PERMISSIONS.md)
+for voluntary donations and advertising revenue. See [`LICENSE`](LICENSE) for
+the standard license and [`PERMISSIONS.md`](PERMISSIONS.md) for the grant and
+its conditions. Payment must not buy access to the software, games built with
+it, or their updates, features, or game content, including early access.
+
+Copyright © 2026 Matthew Stanley. Matthew Stanley has authority from the relevant
+copyright holders to grant the additional permissions for SonicTheHedgehogSMSRecomp's project
+code, as stated in [`PERMISSIONS.md`](PERMISSIONS.md). Licensing inquiries go to
+him at <https://1379.tech>.
+
+By contributing, you license your contribution under the project's
+[PolyForm Noncommercial License 1.0.0](LICENSE), grant the
+[additional permissions in `PERMISSIONS.md`](PERMISSIONS.md) for the rights you
+control in your contribution, and authorize Matthew Stanley to grant those same
+additional permissions for it.
+
+The [smsggrecomp](https://github.com/mstan/smsggrecomp) engine and its
+third-party components keep their own terms; release ZIPs carry every notice
+under `licenses/`. The *Sonic the Hedgehog* ROM and any data derived from it,
+including generated C, are **not** in this repo and are not licensed for
 redistribution.
 
 ---
