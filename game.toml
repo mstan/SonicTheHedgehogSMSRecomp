@@ -4,6 +4,7 @@
 # Primary bring-up target.
 
 [game]
+name = "Sonic the Hedgehog"
 output_prefix = "sonic1sms"
 platform      = "sms"
 rom           = "sonicthehedgehog.sms"   # gitignored
