@@ -12,13 +12,13 @@ The game's Z80 machine code is translated **ahead of time** into C and compiled
 to a native binary — it is not interpreted at runtime. The rest of the Master
 System (VDP, SN76489 sound, controller/system ports, the Sega mapper) is modeled
 by the [smsggrecomp](https://github.com/mstan/smsggrecomp) runtime. Computed
-jumps the static analysis can't resolve fall back to a bundled Z80 interpreter
-over the live bus. You supply your own legally-dumped copy of the ROM; it is
+jumps require generated coverage; an unsupported native target stops with a
+coverage error. You supply your own legally-dumped copy of the ROM; it is
 **never** redistributed here.
 
 ## Status
 
-**v0.0.4 — assisted coverage pre-release.** The assisted survey covers 27 original level/bonus selectors and two ending variants through the staff roll. The ROM-verified dispatch profile runs those routes with zero fallback. All 89 native/interpreter rendered checkpoints agree. These are assisted scene tests; full unassisted gameplay remains unverified. See [coverage details](smsggrecomp/COVERAGE.md) and [reproducible routes](tests/coverage/suite.json).
+**v0.0.4 — assisted coverage pre-release.** The assisted survey covers 27 original level/bonus selectors and two ending variants through the staff roll. The ROM-verified dispatch profile runs those routes with zero fallback. The retained reference survey records 89 matching native/interpreter rendered checkpoints; the current coverage command runs HLE only. These are assisted scene tests; full unassisted gameplay remains unverified. See [coverage details](smsggrecomp/COVERAGE.md) and [reproducible routes](tests/coverage/suite.json).
 
 ## Screenshots
 
@@ -82,7 +82,7 @@ directory still builds this project. `-Framework` selects an alternate engine
 checkout. `-SkipRegenerate` requires compatible generated sources already on
 disk. Generated C and ROMs are ignored and are not distributed.
 
-For a deterministic coverage run:
+For a deterministic host-native HLE coverage run (no interpreter is launched):
 
 ```text
 python smsggrecomp/tools/run_coverage_suite.py --runtime build/SonicTheHedgehogSMSRecomp.exe --rom path/to/sonicthehedgehog.sms --suite tests/coverage/suite.json --out coverage-new
@@ -94,10 +94,10 @@ python smsggrecomp/tools/run_coverage_suite.py --runtime build/SonicTheHedgehogS
 powershell -File smsggrecomp/tools/package_game_release.ps1 -ProjectRoot .
 ```
 
-This stages the built exe, `SDL2.dll`, `Play.cmd`/`Play 16x.cmd`,
+This stages the built exe, its verified runtime DLL closure, launcher assets, `Play.cmd`/`Play 16x.cmd`,
 `README.txt` (from [`packaging/README.txt.in`](packaging/README.txt.in)) and
 every license notice under `licenses/`, then writes
-`release/SonicTheHedgehogSMSRecomp-windows-x64.zip`. It fails if any notice is missing.
+`release/SonicTheHedgehogSMSRecomp-windows-x64.zip`. It fails if required assets, runtime dependencies or notices are missing, and reopens the ZIP to verify its contents. Double-click `Play.cmd` to select your original image; dragging an image onto it also works.
 
 ## Repo layout
 

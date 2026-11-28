@@ -1,7 +1,7 @@
 Sonic the Hedgehog (Master System) - v@VERSION@
 
 Supply your own supported ROM (CRC32 B519E833). No ROM is included.
-Drag the ROM onto Play.cmd for normal native resolution or Play 16x.cmd for faithful 16x GPU output. Normal audio is enabled.
+Open Play.cmd to select your original ROM, or drag the ROM onto Play.cmd for normal native resolution or Play 16x.cmd for faithful 16x GPU output. Normal audio is enabled.
 You can also run: @EXE@ path\to\sonicthehedgehog.sms --window 3 --internal-scale 16
 
 Controls: arrows move, Z/X buttons, Enter Start, Esc quit.
